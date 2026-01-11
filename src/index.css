@@ -1,0 +1,254 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap');
+
+@layer base {
+  :root {
+    /* Core palette - Slate Navy with Warm Amber */
+    --background: 210 20% 98%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Deep slate - trust & expertise */
+    --primary: 222 47% 11%;
+    --primary-foreground: 210 40% 98%;
+
+    /* Soft slate for secondary surfaces */
+    --secondary: 214 32% 91%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    /* Warm amber accent - human touch */
+    --accent: 38 92% 50%;
+    --accent-foreground: 222 47% 11%;
+
+    /* Trust green for verified states */
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+
+    /* Availability indicator */
+    --available: 142 76% 36%;
+    --limited: 38 92% 50%;
+    --unavailable: 0 84% 60%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 222 47% 11%;
+
+    --radius: 0.75rem;
+
+    /* Custom properties */
+    --gradient-trust: linear-gradient(135deg, hsl(222 47% 11%) 0%, hsl(222 47% 20%) 100%);
+    --gradient-warm: linear-gradient(135deg, hsl(38 92% 50%) 0%, hsl(25 95% 53%) 100%);
+    --gradient-surface: linear-gradient(180deg, hsl(210 20% 98%) 0%, hsl(210 40% 96%) 100%);
+    
+    --shadow-card: 0 1px 3px 0 hsl(222 47% 11% / 0.1), 0 1px 2px -1px hsl(222 47% 11% / 0.1);
+    --shadow-elevated: 0 10px 15px -3px hsl(222 47% 11% / 0.1), 0 4px 6px -4px hsl(222 47% 11% / 0.1);
+    --shadow-glow: 0 0 40px hsl(38 92% 50% / 0.15);
+
+    /* Typography */
+    --font-display: 'Fraunces', serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Sidebar defaults */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 8%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 38 92% 50%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 212 27% 84%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer components {
+  .trust-badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium;
+    @apply bg-success/10 text-success border border-success/20;
+  }
+
+  .availability-badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium;
+  }
+
+  .availability-badge.available {
+    @apply bg-success/10 text-success;
+  }
+
+  .availability-badge.limited {
+    @apply bg-accent/10 text-accent;
+  }
+
+  .city-card {
+    @apply relative overflow-hidden rounded-xl border bg-card p-6 cursor-pointer;
+    @apply transition-all duration-300 ease-out;
+    @apply hover:shadow-elevated hover:border-primary/20 hover:-translate-y-1;
+  }
+
+  .city-card.selected {
+    @apply border-primary shadow-elevated ring-2 ring-primary/10;
+  }
+
+  .recommendation-card {
+    @apply relative overflow-hidden rounded-2xl border-2 bg-card p-8;
+    @apply transition-all duration-300;
+  }
+
+  .recommendation-card.recommended {
+    @apply border-accent shadow-glow;
+  }
+
+  .comparison-card {
+    @apply relative overflow-hidden rounded-xl border bg-card;
+    @apply transition-all duration-300 hover:shadow-elevated;
+  }
+
+  .step-indicator {
+    @apply flex items-center gap-3;
+  }
+
+  .step-indicator .step {
+    @apply w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium;
+    @apply transition-all duration-300;
+  }
+
+  .step-indicator .step.active {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  .step-indicator .step.completed {
+    @apply bg-success text-success-foreground;
+  }
+
+  .step-indicator .step.pending {
+    @apply bg-muted text-muted-foreground;
+  }
+
+  .section-label {
+    @apply text-xs font-medium uppercase tracking-wider text-muted-foreground;
+  }
+
+  .helper-text {
+    @apply text-sm text-muted-foreground leading-relaxed;
+  }
+
+  .cta-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg;
+    @apply bg-primary text-primary-foreground font-medium;
+    @apply transition-all duration-200 hover:opacity-90;
+  }
+
+  .cta-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg;
+    @apply border-2 border-primary text-primary font-medium;
+    @apply transition-all duration-200 hover:bg-primary hover:text-primary-foreground;
+  }
+
+  .cta-warm {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg;
+    @apply font-medium text-foreground;
+    background: var(--gradient-warm);
+    @apply transition-all duration-200 hover:opacity-90 hover:shadow-glow;
+  }
+}
+
+@layer utilities {
+  .gradient-trust {
+    background: var(--gradient-trust);
+  }
+
+  .gradient-warm {
+    background: var(--gradient-warm);
+  }
+
+  .gradient-surface {
+    background: var(--gradient-surface);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-body {
+    font-family: var(--font-body);
+  }
+}
