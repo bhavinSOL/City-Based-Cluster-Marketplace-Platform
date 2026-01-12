@@ -1,5 +1,6 @@
 # 📌 City-Based Cluster + Marketplace Platform
-
+## Live Preview of UI
+    "https://city-based-cluster-marketplace-plat.vercel.app"
 ## UI/UX Case Study – Internship Task Submission
 
 - Author: Bhavin Parmar
